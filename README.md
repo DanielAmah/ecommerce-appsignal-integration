@@ -71,3 +71,9 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ### Start the Rails server
 `rails s`
+
+### appsignal setup
+
+  replace APPSIGNAL_PUSH_API_KEY in appsignal.yml with your key from appsignal
+
+  push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
