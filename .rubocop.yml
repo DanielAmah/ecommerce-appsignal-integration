@@ -1,0 +1,375 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  SuggestExtensions: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/EmptyElse:
+  EnforcedStyle: empty
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  EnforcedStyle: brackets
+  MinSize: 3
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 120
+  Severity: "warning"
+
+Layout/IndentationConsistency:
+  Enabled: false # Would be nice
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 100
+
+Metrics/PerceivedComplexity:
+  Max: 50
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: true
+
+Style/ClassAndModuleChildren:
+  Severity: refactor
+  # 2019-12-03
+  #   Although the nested style makes it easier to find errors, we can't use it because we currently have a Childcare
+  #   name space AND a Childcare class. This causes name collsions on a few files.
+  # 2021-02-23
+  #   Between 2019 and 2021, we upgraded Rails and fix a number of autoloading issues. This issue
+  #   is likely resolved. However, we should still enforce the compact syntax for childcare files.
+  EnforcedStyle: compact
+  # Excluding files we know are safe
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/TernaryParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+
+Metrics/BlockLength:
+  Enabled: true
+
+Style/SingleLineBlockParams:
+  Description: "Enforces the names of some block params."
+  Enabled: false
+
+# Disabled since it catches strftime incorrectly
+# See https://github.com/bbatsov/rubocop/issues/5245
+Style/FormatStringToken:
+  Enabled: false
+
+# safe_load is too restrictive, since we need ERB
+Security/YAMLLoad:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+# Rails ActiveRecord ignores blocks, so mark this as unsafe.
+#
+# Rubocop recommends: Use count instead of select...length
+#
+# This would affect lines of code such as:
+#   @checked_out_count = todays_reports.select(&:is_checked_out).length
+# With autocorrect doing this incorrectly:
+#   @checked_out_count = todays_reports.count(&:is_checked_out)
+#
+# ActiveRecord ignores this block and counts both true + false.
+#
+# Really, we should use the more performant ActiveRelation version:
+#   @checked_out_count = todays_reports.where(is_checked_out: true).count
+#
+# If we want to keep this in Ruby-land, we ought to convert this to an Enumerable:
+#   @checked_out_count = todays_reports.to_a.count(&:is_checked_out)
+#
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+  # EnforcedStyle: snake_case
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Gemspec/DeprecatedAttributeAssignment: # new in 1.30
+  Enabled: false
+Gemspec/DevelopmentDependencies: # new in 1.44
+  Enabled: false
+Gemspec/RequireMFA: # new in 1.23
+  Enabled: false
+Layout/LineContinuationLeadingSpace: # new in 1.31
+  Enabled: false
+Layout/LineContinuationSpacing: # new in 1.31
+  Enabled: false
+Layout/LineEndStringConcatenationIndentation: # new in 1.18
+  Enabled: false
+Layout/SpaceBeforeBrackets: # new in 1.7
+  Enabled: false
+Lint/AmbiguousAssignment: # new in 1.7
+  Enabled: false
+Lint/AmbiguousOperatorPrecedence: # new in 1.21
+  Enabled: false
+Lint/AmbiguousRange: # new in 1.19
+  Enabled: false
+Lint/ConstantOverwrittenInRescue: # new in 1.31
+  Enabled: false
+Lint/DeprecatedConstants: # new in 1.8
+  Enabled: false
+Lint/DuplicateBranch: # new in 1.3
+  Enabled: false
+Lint/DuplicateMagicComment: # new in 1.37
+  Enabled: false
+Lint/DuplicateMatchPattern: # new in 1.50
+  Enabled: false
+Lint/DuplicateRegexpCharacterClassElement: # new in 1.1
+  Enabled: false
+Lint/EmptyBlock: # new in 1.1
+  Enabled: false
+Lint/EmptyClass: # new in 1.3
+  Enabled: false
+Lint/EmptyInPattern: # new in 1.16
+  Enabled: false
+Lint/IncompatibleIoSelectWithFiberScheduler: # new in 1.21
+  Enabled: false
+Lint/ItWithoutArgumentsInBlock: # new in 1.59
+  Enabled: false
+Lint/LambdaWithoutLiteralBlock: # new in 1.8
+  Enabled: false
+Lint/LiteralAssignmentInCondition: # new in 1.58
+  Enabled: false
+Lint/MixedCaseRange: # new in 1.53
+  Enabled: false
+Lint/NoReturnInBeginEndBlocks: # new in 1.2
+  Enabled: false
+Lint/NonAtomicFileOperation: # new in 1.31
+  Enabled: false
+Lint/NumberedParameterAssignment: # new in 1.9
+  Enabled: false
+Lint/OrAssignmentToConstant: # new in 1.9
+  Enabled: false
+Lint/RedundantDirGlobSort: # new in 1.8
+  Enabled: false
+Lint/RedundantRegexpQuantifiers: # new in 1.53
+  Enabled: false
+Lint/RefinementImportMethods: # new in 1.27
+  Enabled: false
+Lint/RequireRangeParentheses: # new in 1.32
+  Enabled: false
+Lint/RequireRelativeSelfPath: # new in 1.22
+  Enabled: false
+Lint/SymbolConversion: # new in 1.9
+  Enabled: false
+Lint/ToEnumArguments: # new in 1.1
+  Enabled: false
+Lint/TripleQuotes: # new in 1.9
+  Enabled: false
+Lint/UnexpectedBlockArity: # new in 1.5
+  Enabled: false
+Lint/UnmodifiedReduceAccumulator: # new in 1.1
+  Enabled: false
+Lint/UselessRescue: # new in 1.43
+  Enabled: false
+Lint/UselessRuby2Keywords: # new in 1.23
+  Enabled: false
+Metrics/CollectionLiteralLength: # new in 1.47
+  Enabled: false
+Naming/BlockForwarding: # new in 1.24
+  Enabled: false
+Security/CompoundHash: # new in 1.28
+  Enabled: false
+Security/IoMethods: # new in 1.22
+  Enabled: false
+Style/ArgumentsForwarding: # new in 1.1
+  Enabled: false
+Style/ArrayIntersect: # new in 1.40
+  Enabled: false
+Style/CollectionCompact: # new in 1.2
+  Enabled: false
+Style/ComparableClamp: # new in 1.44
+  Enabled: false
+Style/ConcatArrayLiterals: # new in 1.41
+  Enabled: false
+Style/DataInheritance: # new in 1.49
+  Enabled: false
+Style/DirEmpty: # new in 1.48
+  Enabled: false
+Style/DocumentDynamicEvalDefinition: # new in 1.1
+  Enabled: false
+Style/EmptyHeredoc: # new in 1.32
+  Enabled: false
+Style/EndlessMethod: # new in 1.8
+  Enabled: false
+Style/EnvHome: # new in 1.29
+  Enabled: false
+Style/ExactRegexpMatch: # new in 1.51
+  Enabled: false
+Style/FetchEnvVar: # new in 1.28
+  Enabled: false
+Style/FileEmpty: # new in 1.48
+  Enabled: false
+Style/FileRead: # new in 1.24
+  Enabled: false
+Style/FileWrite: # new in 1.24
+  Enabled: false
+Style/HashConversion: # new in 1.10
+  Enabled: false
+Style/HashExcept: # new in 1.7
+  Enabled: false
+Style/IfWithBooleanLiteralBranches: # new in 1.9
+  Enabled: false
+Style/InPatternThen: # new in 1.16
+  Enabled: false
+Style/MagicCommentFormat: # new in 1.35
+  Enabled: false
+Style/MapCompactWithConditionalBlock: # new in 1.30
+  Enabled: false
+Style/MapToHash: # new in 1.24
+  Enabled: false
+Style/MapToSet: # new in 1.42
+  Enabled: false
+Style/MinMaxComparison: # new in 1.42
+  Enabled: false
+Style/MultilineInPatternThen: # new in 1.16
+  Enabled: false
+Style/NegatedIfElseCondition: # new in 1.2
+  Enabled: false
+Style/NestedFileDirname: # new in 1.26
+  Enabled: false
+Style/NilLambda: # new in 1.3
+  Enabled: false
+Style/NumberedParameters: # new in 1.22
+  Enabled: false
+Style/NumberedParametersLimit: # new in 1.22
+  Enabled: false
+Style/ObjectThen: # new in 1.28
+  Enabled: false
+Style/OpenStructUse: # new in 1.23
+  Enabled: false
+Style/OperatorMethodCall: # new in 1.37
+  Enabled: false
+Style/QuotedSymbols: # new in 1.16
+  Enabled: false
+Style/RedundantArgument: # new in 1.4
+  Enabled: false
+Style/RedundantArrayConstructor: # new in 1.52
+  Enabled: false
+Style/RedundantConstantBase: # new in 1.40
+  Enabled: false
+Style/RedundantCurrentDirectoryInPath: # new in 1.53
+  Enabled: false
+Style/RedundantDoubleSplatHashBraces: # new in 1.41
+  Enabled: false
+Style/RedundantEach: # new in 1.38
+  Enabled: false
+Style/RedundantFilterChain: # new in 1.52
+  Enabled: false
+Style/RedundantHeredocDelimiterQuotes: # new in 1.45
+  Enabled: false
+Style/RedundantInitialize: # new in 1.27
+  Enabled: false
+Style/RedundantLineContinuation: # new in 1.49
+  Enabled: false
+Style/RedundantRegexpArgument: # new in 1.53
+  Enabled: false
+Style/RedundantRegexpConstructor: # new in 1.52
+  Enabled: false
+Style/RedundantSelfAssignmentBranch: # new in 1.19
+  Enabled: false
+Style/RedundantStringEscape: # new in 1.37
+  Enabled: false
+Style/ReturnNilInPredicateMethodDefinition: # new in 1.53
+  Enabled: false
+Style/SelectByRegexp: # new in 1.22
+  Enabled: false
+Style/SingleLineDoEndBlock: # new in 1.57
+  Enabled: false
+Style/StringChars: # new in 1.12
+  Enabled: false
+Style/SuperWithArgsParentheses: # new in 1.58
+  Enabled: false
+Style/SwapValues: # new in 1.1
+  Enabled: false
+Style/YAMLFileRead: # new in 1.53
+  Enabled: false
