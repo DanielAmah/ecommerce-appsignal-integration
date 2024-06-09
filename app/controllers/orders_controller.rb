@@ -19,9 +19,15 @@ class OrdersController < ApplicationController
 
       render json: orders.as_json(
         include: {
-          user: { only: %i[id name email] },
-          line_items: { include: { product: { only: %i[id name price] } },
-                        only: %i[id quantity price] },
+          user: {
+            only: %i[id name email],
+          },
+          line_items: {
+            include: {
+              product: { only: %i[id name price] },
+            },
+            only: %i[id quantity price],
+          },
         },
       )
     end
